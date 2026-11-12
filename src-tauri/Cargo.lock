@@ -4678,7 +4678,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "wishlez-desktop"
+name = "wishlez"
 version = "0.1.0"
 dependencies = [
  "serde",

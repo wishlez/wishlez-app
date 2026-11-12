@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "wishlez-desktop",
+  "productName": "Wishlez",
   "version": "0.1.0",
   "identifier": "com.gopikrishna19.Wishlez",
   "build": {
@@ -12,9 +12,10 @@
   "app": {
     "windows": [
       {
-        "title": "wishlez-desktop",
+        "title": "Wishlez",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "decorations": false
       }
     ],
     "security": {

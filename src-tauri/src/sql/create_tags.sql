@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS tags
+(
+  name      VARCHAR(100) PRIMARY KEY NOT NULL,
+  embedding BLOB
+);

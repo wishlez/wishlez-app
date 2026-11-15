@@ -31,7 +31,8 @@
   "include": [
     "src",
     "components",
-    "lib"
+    "lib",
+    "i18n"
   ],
   "references": [
     {

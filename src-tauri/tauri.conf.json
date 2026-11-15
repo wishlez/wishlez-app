@@ -15,7 +15,8 @@
         "title": "Wishlez",
         "width": 800,
         "height": 600,
-        "decorations": false
+        "minWidth": 320,
+        "minHeight": 480
       }
     ],
     "security": {
@@ -31,6 +32,22 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
+    ],
+    "fileAssociations": [
+      {
+        "ext": [
+          "wfolio"
+        ],
+        "name": "Wishlez Portfolio",
+        "role": "Editor",
+        "rank": "Owner",
+        "exportedType": {
+          "identifier": "com.gopikrishna19.Wishlez.portfolio",
+          "conformsTo": [
+            "public.data"
+          ]
+        }
+      }
     ]
   }
 }

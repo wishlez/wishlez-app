@@ -1,0 +1,9 @@
+{
+  "launcher": {
+    "create": "Create",
+    "create_portfolio": "Create a new portfolio",
+    "open_portfolio": "Open an existing portfolio",
+    "open": "Open",
+    "introduction": "Create a new portfolio or open an existing one to get started"
+  }
+}

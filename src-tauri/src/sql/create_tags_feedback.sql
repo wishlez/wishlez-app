@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS tags_feedback
+(
+  tag   VARCHAR(100) NOT NULL,
+  token VARCHAR(100) NOT NULL,
+  score REAL         NOT NULL DEFAULT 0,
+  count INTEGER      NOT NULL DEFAULT 0,
+
+  PRIMARY KEY (tag, token),
+
+  CONSTRAINT fk_tag
+    FOREIGN KEY (tag)
+      REFERENCES tags (name)
+      ON UPDATE CASCADE ON DELETE CASCADE
+);

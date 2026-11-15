@@ -21,7 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     /* Import options */
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"

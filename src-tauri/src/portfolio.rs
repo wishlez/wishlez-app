@@ -70,6 +70,7 @@ impl Portfolio {
 
         if version != SCHEMA_VERSION {
             return Err(WishlezError::GeneralError {
+                code: "0004".to_string(),
                 message: format!("Not a Wishlez portfolio (version {version})"),
             });
         }

@@ -1,32 +1,29 @@
 use thiserror::Error;
 
-#[derive(Debug, Error)]
+#[derive(Debug, Error, serde::Serialize)]
+#[serde(untagged)]
 pub enum WishlezError {
-    #[error("Database error: {message}")]
-    DatabaseError { message: String },
+    #[error("General error {code}: {message}")]
+    GeneralError { code: String, message: String },
 
-    #[error("General error: {message}")]
-    GeneralError { message: String },
-}
-
-impl From<rusqlite::Error> for WishlezError {
-    fn from(e: rusqlite::Error) -> Self {
-        WishlezError::DatabaseError {
-            message: e.to_string(),
-        }
-    }
+    #[error("Database error {code}: {message}")]
+    DatabaseError { code: String, message: String },
 }
 
 impl From<std::io::Error> for WishlezError {
     fn from(e: std::io::Error) -> Self {
         WishlezError::GeneralError {
+            code: "0001".to_string(),
             message: e.to_string(),
         }
     }
 }
 
-impl serde::Serialize for WishlezError {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.serialize_str(&self.to_string())
+impl From<rusqlite::Error> for WishlezError {
+    fn from(e: rusqlite::Error) -> Self {
+        WishlezError::DatabaseError {
+            code: "0002".to_string(),
+            message: e.to_string(),
+        }
     }
 }

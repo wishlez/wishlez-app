@@ -1,4 +1,11 @@
 {
+  "errors": {
+    "code": "An unknown error occurred",
+    "code_0001": "Something went wrong during the last operation",
+    "code_0002": "Something went wrong during the portfolio operation",
+    "code_0003": "Failed to create a new portfolio",
+    "code_0004": "The selected portfolio file is corrupted or invalid"
+  },
   "launcher": {
     "create": "Create",
     "create_portfolio": "Create a new portfolio",

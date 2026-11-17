@@ -1,52 +1,12 @@
-import {FC, useCallback} from 'react';
+import {FC} from 'react';
 import {Button} from '@/components/ui/button.tsx';
 import {IconFolderOpen, IconPlus} from '@tabler/icons-react';
 import {useTranslation} from 'react-i18next';
-import {open, save} from '@tauri-apps/plugin-dialog';
-import {useTauriEvent} from '@/components/useTauriEvent.ts';
-import {invoke} from '@tauri-apps/api/core';
-import {showError} from '@/components/showError.ts';
-
-const portfolioFilters = [
-    {
-        name: 'Wishlez Portfolio',
-        extensions: ['wfolio']
-    }
-];
+import {useWfolioHandlers} from '@/components/useWfolioHandlers.ts';
 
 export const Launcher: FC = () => {
     const {t} = useTranslation();
-
-    const handleCreate = useCallback(async () => {
-        try {
-            const path = await save({
-                title: t('launcher.create_portfolio'),
-                filters: portfolioFilters,
-                defaultPath: 'MyPortfolio.wfolio'
-            });
-            if (path) {
-                await invoke('create_portfolio', {path});
-            }
-        } catch (error) {
-            showError(error, 3);
-        }
-    }, [t]);
-    const handleOpen = useCallback(async () => {
-        try {
-            const path = await open({
-                title: t('launcher.open_portfolio'),
-                filters: portfolioFilters
-            });
-            if (path) {
-                await invoke('access_portfolio', {path});
-            }
-        } catch (error) {
-            showError(error, 4);
-        }
-    }, [t]);
-
-    useTauriEvent('menu:file_create', handleCreate);
-    useTauriEvent('menu:file_open', handleOpen);
+    const {handleCreate, handleOpen} = useWfolioHandlers();
 
     return (
         <div className={'grid items-center content-center justify-center min-h-svh gap-4'}>

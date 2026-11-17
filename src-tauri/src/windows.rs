@@ -35,14 +35,19 @@ pub fn open_portfolio(app: &AppHandle, path: String, portfolio: Portfolio) -> ta
             .min_inner_size(320.0, 480.0)
             .build();
 
-    if let Err(error) = result {
-        app.state::<OpenPortfolios>()
-            .0
-            .lock()
-            .unwrap()
-            .remove(&label);
-        return Err(error);
-    }
+    let window = match result {
+        Ok(window) => window,
+        Err(error) => {
+            app.state::<OpenPortfolios>()
+                .0
+                .lock()
+                .unwrap()
+                .remove(&label);
+            return Err(error);
+        }
+    };
+
+    window.set_menu(crate::menu::build(app, &crate::menu::portfolio::menu())?)?;
 
     if let Some(launcher) = app.get_webview_window(LAUNCHER) {
         launcher.close()?;

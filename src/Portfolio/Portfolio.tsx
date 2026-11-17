@@ -2,6 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import {invoke} from '@tauri-apps/api/core';
 import {showError} from '@/components/showError.ts';
 import type {Account} from '@/components/types/Account.ts';
+import {useWfolioHandlers} from '@/components/useWfolioHandlers.ts';
 
 export const Portfolio: FC = () => {
     const [accounts, setAccounts] = useState<Account[]>([]);
@@ -9,6 +10,8 @@ export const Portfolio: FC = () => {
     useEffect(() => {
         invoke<Account[]>('read_accounts').then(setAccounts).catch(showError);
     }, []);
+
+    useWfolioHandlers();
 
     return (
         <main className="min-h-svh p-4">

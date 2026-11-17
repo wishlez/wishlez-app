@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
-import {type Event, listen, type UnlistenFn} from '@tauri-apps/api/event';
+import {type Event, type UnlistenFn} from '@tauri-apps/api/event';
+import {getCurrentWindow} from '@tauri-apps/api/window';
 
 export function useTauriEvent<T = unknown>(
     eventName: string,
@@ -9,7 +10,7 @@ export function useTauriEvent<T = unknown>(
         let disposed = false;
         let unlisten: UnlistenFn | undefined;
 
-        void listen<T>(eventName, async event => {
+        void getCurrentWindow().listen<T>(eventName, async event => {
             if (disposed) return;
 
             try {

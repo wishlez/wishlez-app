@@ -2,6 +2,7 @@ use tauri::{AppHandle, Emitter, Manager, menu::MenuEvent};
 
 mod build;
 pub mod launcher;
+pub mod portfolio;
 mod spec;
 
 pub use build::build;
@@ -21,6 +22,14 @@ impl ActiveWindow {
 }
 
 pub fn handle_event(app: &AppHandle, event: MenuEvent) {
+    if event.id().as_ref() == "file_open_launcher" {
+        let app = app.clone();
+        tauri::async_runtime::spawn(async move {
+            let _ = crate::windows::open_launcher(&app);
+        });
+        return;
+    }
+
     let Some(label) = app.state::<ActiveWindow>().get() else {
         return;
     };

@@ -17,7 +17,7 @@ pub enum Entry {
 
 pub enum Predefined {
     Quit,
-    // Close,
+    Close,
     // Undo,
     // Redo,
     // Cut,

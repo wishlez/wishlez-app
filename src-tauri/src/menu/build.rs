@@ -14,6 +14,13 @@ fn make_entry(app: &AppHandle, entry: &Entry) -> tauri::Result<Item> {
         Entry::Separator => Box::new(PredefinedMenuItem::separator(app)?),
         Entry::Predefined(kind) => Box::new(match kind {
             Predefined::Quit => PredefinedMenuItem::quit(app, None)?,
+            Predefined::Close => PredefinedMenuItem::close_window(app, None)?,
+            // Predefined::Undo => PredefinedMenuItem::undo(app, None)?,
+            // Predefined::Redo => PredefinedMenuItem::redo(app, None)?,
+            // Predefined::Cut => PredefinedMenuItem::cut(app, None)?,
+            // Predefined::Copy => PredefinedMenuItem::copy(app, None)?,
+            // Predefined::Paste => PredefinedMenuItem::paste(app, None)?,
+            // Predefined::SelectAll => PredefinedMenuItem::select_all(app, None)?,
         }),
     })
 }

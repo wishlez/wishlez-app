@@ -27,3 +27,12 @@ impl From<rusqlite::Error> for WishlezError {
         }
     }
 }
+
+impl From<tauri::Error> for WishlezError {
+    fn from(e: tauri::Error) -> Self {
+        WishlezError::GeneralError {
+            code: "0005".to_string(),
+            message: e.to_string(),
+        }
+    }
+}

@@ -28,7 +28,7 @@ export const Launcher: FC = () => {
                 await invoke('create_portfolio', {path});
             }
         } catch (error) {
-            showError(error);
+            showError(error, 3);
         }
     }, [t]);
     const handleOpen = useCallback(async () => {
@@ -41,7 +41,7 @@ export const Launcher: FC = () => {
                 await invoke('access_portfolio', {path});
             }
         } catch (error) {
-            showError(error);
+            showError(error, 4);
         }
     }, [t]);
 

@@ -4,7 +4,9 @@
     "code_0001": "Something went wrong during the last operation",
     "code_0002": "Something went wrong during the portfolio operation",
     "code_0003": "Failed to create a new portfolio",
-    "code_0004": "The selected portfolio file is corrupted or invalid"
+    "code_0004": "The selected portfolio file is corrupted or invalid",
+    "code_0005": "Failed to open the selected portfolio file",
+    "code_0006": "Unable to access portfolio within the current window context"
   },
   "launcher": {
     "create": "Create",

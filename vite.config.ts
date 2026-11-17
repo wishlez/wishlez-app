@@ -28,5 +28,13 @@ export default defineConfig(() => ({
         watch: {
             ignored: ['**/src-tauri/**']
         }
+    },
+    build: {
+        rolldownOptions: {
+            input: {
+                main: 'index.html',
+                launcher: 'launcher.html'
+            }
+        }
     }
 }));

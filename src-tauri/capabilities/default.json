@@ -1,17 +1,15 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Capability for the main window",
+  "description": "Capability for the application",
   "windows": [
-    "main"
+    "launcher",
+    "portfolio-*"
   ],
   "permissions": [
     "core:default",
     "core:window:default",
-    "core:window:allow-close",
-    "core:window:allow-minimize",
-    "core:window:allow-toggle-maximize",
-    "core:window:allow-start-dragging",
+    "core:webview:allow-create-webview-window",
     "opener:default",
     "dialog:default"
   ]

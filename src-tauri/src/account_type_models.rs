@@ -1,6 +1,7 @@
 use rusqlite::types::{FromSql, FromSqlResult, ToSql, ToSqlOutput, ValueRef};
 
-#[derive(Clone)]
+#[derive(Clone, serde::Serialize, ts_rs::TS)]
+#[ts(export)]
 pub enum AccountType {
     Expense,
     Income,

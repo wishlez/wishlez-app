@@ -97,13 +97,15 @@ impl Portfolio {
 }
 
 #[tauri::command]
-pub fn create_portfolio(path: String) -> Result<(), WishlezError> {
-    Portfolio::create(&path)?;
+pub async fn create_portfolio(app: tauri::AppHandle, path: String) -> Result<(), WishlezError> {
+    let portfolio = Portfolio::create(&path)?;
+    crate::windows::open_portfolio(&app, path, portfolio)?;
     Ok(())
 }
 
 #[tauri::command]
-pub fn access_portfolio(path: String) -> Result<(), WishlezError> {
-    Portfolio::open(&path)?;
+pub async fn access_portfolio(app: tauri::AppHandle, path: String) -> Result<(), WishlezError> {
+    let portfolio = Portfolio::open(&path)?;
+    crate::windows::open_portfolio(&app, path, portfolio)?;
     Ok(())
 }

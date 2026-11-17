@@ -10,15 +10,7 @@
     "frontendDist": "../dist"
   },
   "app": {
-    "windows": [
-      {
-        "title": "Wishlez",
-        "width": 800,
-        "height": 600,
-        "minWidth": 320,
-        "minHeight": 480
-      }
-    ],
+    "windows": [],
     "security": {
       "csp": null
     }

@@ -84,11 +84,12 @@ change or reveal the whole solution unless the user asks.
 
 ### verify
 
-Inspect the user's actual implementation against the agreed task or plan, including relevant surrounding code. Run
-focused, appropriate checks when available. Identify concrete problems first, with file and line references where
-possible, explain their impact, and give the user a small next step or hint to fix them rather than silently fixing
-them. If no problems are found, say so and clearly note any checks not run or remaining uncertainty. Update plan
-progress only when supported by evidence.
+Read the files touched by the changes you suggested and compare what the user actually wrote against those suggestions
+and the agreed task or plan, including relevant surrounding code. This code review is the core of verify; passing
+linters, type checkers, clippy, or builds is not enough on its own, because the user's IDE already runs them. Run such
+checks only as a supplement when useful. Identify concrete problems first, with file and line references where possible,
+explain their impact, and give the user a small next step or hint to fix them rather than silently fixing them. If no
+problems are found, say so and note any remaining uncertainty. Update plan progress only when supported by evidence.
 
 ### do it
 

@@ -1,0 +1,26 @@
+site_name: Wishlez
+site_description: Cash-flow analysis across accounts and over time.
+docs_dir: docs
+site_dir: site
+
+plugins:
+  - search
+
+markdown_extensions:
+  - tables
+  - fenced_code
+
+nav:
+  - Home: README.md
+  - Backlog:
+      - Overview: backlog/README.md
+      - Portfolio workspace: backlog/FEAT-0001.md
+      - Journal editing and transaction actions: backlog/FEAT-0002.md
+      - Transaction imports: backlog/FEAT-0003.md
+      - Automated tagging: backlog/FEAT-0004.md
+      - Sequential reconciliation: backlog/FEAT-0005.md
+      - Dashboard and cash-flow reports: backlog/FEAT-0006.md
+      - Account and tag management: backlog/FEAT-0007.md
+      - Tag-based journeys: backlog/FEAT-0008.md
+      - Multi-window and desktop experience: backlog/FEAT-0009.md
+      - Technical debt and reliability: backlog/FEAT-0010.md

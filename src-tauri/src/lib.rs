@@ -1,17 +1,15 @@
 use tauri::Manager;
 
-mod __utils__;
 mod account;
 mod account_models;
 mod account_type_models;
+mod error;
 mod menu;
 mod portfolio;
 mod sql;
 mod windows;
 mod windows_states;
 mod windows_utils;
-
-pub use __utils__::WishlezError;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {

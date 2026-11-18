@@ -1,4 +1,4 @@
-use crate::WishlezError;
+use crate::error::WishlezError;
 use crate::portfolio::Portfolio;
 use std::collections::HashMap;
 use std::sync::atomic::AtomicBool;

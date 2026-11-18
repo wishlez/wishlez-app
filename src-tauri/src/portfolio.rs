@@ -1,7 +1,7 @@
-use crate::WishlezError;
 use crate::account::create_account_with_tx;
 use crate::account_models::{BuiltinAccountId, CreateOrUpdateAccountRequest};
 use crate::account_type_models::AccountType;
+use crate::error::WishlezError;
 use crate::sql::*;
 use crate::windows_utils::focus_window_if_already_open;
 use rusqlite::Connection;

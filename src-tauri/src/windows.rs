@@ -1,5 +1,6 @@
 use crate::portfolio::Portfolio;
 use crate::windows_states::OpenPortfolios;
+use crate::windows_utils::{focus_window, focus_window_if_already_open};
 use std::sync::{Arc, Mutex};
 use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
@@ -7,7 +8,7 @@ pub const LAUNCHER: &str = "launcher";
 
 pub fn open_launcher(app: &AppHandle) -> tauri::Result<()> {
     if let Some(window) = app.get_webview_window(LAUNCHER) {
-        return window.set_focus();
+        return focus_window(&window);
     }
 
     let window = WebviewWindowBuilder::new(app, LAUNCHER, WebviewUrl::App("launcher.html".into()))
@@ -48,10 +49,25 @@ pub fn open_portfolio(app: &AppHandle, path: String, portfolio: Portfolio) -> ta
     };
 
     window.set_menu(crate::menu::build(app, &crate::menu::portfolio::menu())?)?;
+    focus_window(&window)?;
 
     if let Some(launcher) = app.get_webview_window(LAUNCHER) {
         launcher.close()?;
     }
 
     Ok(())
+}
+
+pub fn open_portfolio_path(app: &AppHandle, path: String) -> tauri::Result<()> {
+    if focus_window_if_already_open(app, &path)? {
+        return Ok(());
+    }
+
+    match Portfolio::open(&path) {
+        Ok(portfolio) => open_portfolio(app, path, portfolio),
+        Err(error) => {
+            eprintln!("Failed to open portfolio at {path}: {error}");
+            open_launcher(app)
+        }
+    }
 }

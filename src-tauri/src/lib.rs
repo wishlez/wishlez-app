@@ -9,6 +9,7 @@ mod portfolio;
 mod sql;
 mod windows;
 mod windows_states;
+mod windows_utils;
 
 pub use __utils__::WishlezError;
 
@@ -16,10 +17,29 @@ pub use __utils__::WishlezError;
 pub fn run() {
     tauri::Builder::default()
         .manage(menu::ActiveWindow::default())
+        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
+            let app = app.clone();
+            tauri::async_runtime::spawn(async move {
+                let _ = match windows_utils::get_portfolio_path(args) {
+                    Some(path) => {
+                        let path = std::path::Path::new(&cwd)
+                            .join(path)
+                            .to_string_lossy()
+                            .into_owned();
+                        windows::open_portfolio_path(&app, path)
+                    }
+                    None => windows::open_launcher(&app),
+                };
+            });
+        }))
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
-            windows::open_launcher(app.handle())?;
+            match windows_utils::get_portfolio_path(std::env::args()) {
+                Some(path) => windows::open_portfolio_path(app.handle(), path)?,
+                None => windows::open_launcher(app.handle())?,
+            }
+
             Ok(())
         })
         .on_menu_event(menu::handle_event)

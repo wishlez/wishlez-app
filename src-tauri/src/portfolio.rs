@@ -3,6 +3,7 @@ use crate::account::create_account_with_tx;
 use crate::account_models::{BuiltinAccountId, CreateOrUpdateAccountRequest};
 use crate::account_type_models::AccountType;
 use crate::sql::*;
+use crate::windows_utils::focus_window_if_already_open;
 use rusqlite::Connection;
 
 const SCHEMA_VERSION: i32 = 1;
@@ -105,6 +106,9 @@ pub async fn create_portfolio(app: tauri::AppHandle, path: String) -> Result<(),
 
 #[tauri::command]
 pub async fn access_portfolio(app: tauri::AppHandle, path: String) -> Result<(), WishlezError> {
+    if focus_window_if_already_open(&app, &path)? {
+        return Ok(());
+    }
     let portfolio = Portfolio::open(&path)?;
     crate::windows::open_portfolio(&app, path, portfolio)?;
     Ok(())

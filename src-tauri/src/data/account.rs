@@ -1,10 +1,10 @@
-use crate::account_models::*;
+use super::account_models::*;
+use super::sql::*;
 use crate::error::WishlezError;
-use crate::sql::*;
-use crate::windows_states::CurrentPortfolio;
+use crate::state::CurrentPortfolio;
 use rusqlite::named_params;
 
-pub fn create_account_with_tx(
+pub(super) fn create_account_with_tx(
     tx: &rusqlite::Transaction,
     request: CreateOrUpdateAccountRequest,
 ) -> Result<(), WishlezError> {

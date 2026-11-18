@@ -1,4 +1,4 @@
-use crate::account_type_models::*;
+use super::account_type_models::*;
 use rusqlite::Row;
 
 #[derive(serde::Serialize, ts_rs::TS)]

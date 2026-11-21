@@ -2,6 +2,7 @@ use super::account_models::*;
 use super::sql::*;
 use crate::error::WishlezError;
 use crate::state::CurrentPortfolio;
+use crate::traits::WithNewId;
 use rusqlite::named_params;
 
 pub(super) fn create_account_with_tx(
@@ -30,5 +31,16 @@ pub async fn read_accounts(portfolio: CurrentPortfolio) -> Result<Vec<Account>, 
             .collect::<Result<Vec<Account>, _>>()?;
 
         Ok(accounts)
+    })
+}
+
+#[tauri::command]
+pub fn create_account(
+    portfolio: CurrentPortfolio,
+    request: CreateOrUpdateAccountRequest,
+) -> Result<(), WishlezError> {
+    portfolio.with_tx(|tx| {
+        create_account_with_tx(&tx, request.with_new_id().0)?;
+        Ok(())
     })
 }

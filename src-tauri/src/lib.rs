@@ -3,6 +3,7 @@ mod data;
 mod error;
 mod menu;
 mod state;
+mod traits;
 mod views;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -31,6 +32,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             views::portfolio::create_portfolio,
             views::portfolio::access_portfolio,
+            data::account::create_account,
             data::account::read_accounts,
         ])
         //

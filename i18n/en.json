@@ -8,11 +8,17 @@
     "code_0005": "Failed to open the selected portfolio file",
     "code_0006": "Unable to access portfolio within the current window context"
   },
+  "accounts": {
+    "list_title": "Accounts"
+  },
   "launcher": {
     "create": "Create",
     "create_portfolio": "Create a new portfolio",
     "open_portfolio": "Open an existing portfolio",
     "open": "Open",
     "introduction": "Create a new portfolio or open an existing one to get started"
+  },
+  "portfolio": {
+    "go_to_dashboard": "Go to Dashboard"
   }
 }

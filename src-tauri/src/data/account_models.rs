@@ -1,4 +1,5 @@
 use super::account_type_models::*;
+use crate::traits::WithNewId;
 use rusqlite::Row;
 
 #[derive(serde::Serialize, ts_rs::TS)]
@@ -40,9 +41,18 @@ impl BuiltinAccountId {
     }
 }
 
+#[derive(Clone, serde::Serialize, serde::Deserialize, ts_rs::TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct CreateOrUpdateAccountRequest {
     pub id: Option<String>,
     pub name: String,
     pub account_type: AccountType,
     pub is_built_in: bool,
+}
+
+impl WithNewId for CreateOrUpdateAccountRequest {
+    fn id_mut(&mut self) -> &mut Option<String> {
+        &mut self.id
+    }
 }

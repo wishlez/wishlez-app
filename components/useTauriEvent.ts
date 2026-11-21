@@ -1,11 +1,13 @@
-import {useEffect} from 'react';
-import {type Event, type UnlistenFn} from '@tauri-apps/api/event';
+import {type UnlistenFn} from '@tauri-apps/api/event';
 import {getCurrentWindow} from '@tauri-apps/api/window';
+import {useEffect} from 'react';
 
-export function useTauriEvent<T = unknown>(
+export type TauriEventHandler<T = unknown> = (event: string, payload: T) => unknown | Promise<unknown>;
+
+export const useTauriEvent = <T = unknown>(
     eventName: string,
-    handler: (event: Event<T>) => unknown | Promise<unknown>
-) {
+    handler: TauriEventHandler<T>
+) => {
     useEffect(() => {
         let disposed = false;
         let unlisten: UnlistenFn | undefined;
@@ -14,7 +16,7 @@ export function useTauriEvent<T = unknown>(
             if (disposed) return;
 
             try {
-                await handler(event);
+                await handler(event.event, event.payload);
             } catch (error) {
                 console.error(`Failed to handle ${eventName}:`, error);
             }
@@ -33,4 +35,4 @@ export function useTauriEvent<T = unknown>(
             unlisten?.();
         };
     }, [eventName, handler]);
-}
+};

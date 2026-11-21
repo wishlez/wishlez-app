@@ -1,7 +1,7 @@
-import {open, save} from '@tauri-apps/plugin-dialog';
-import {invoke} from '@tauri-apps/api/core';
 import {showError} from '@/components/showError.ts';
-import {useTauriEvent} from '@/components/useTauriEvent.ts';
+import {PortfolioMenuEvent, usePortfolioMenuEvent} from '@/components/usePortfolioMenuEvent.ts';
+import {invoke} from '@tauri-apps/api/core';
+import {open, save} from '@tauri-apps/plugin-dialog';
 import {useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
 
@@ -17,7 +17,7 @@ type UseWfolioHandlers = () => {
     handleOpen: () => Promise<void>;
 }
 
-export const useWfolioHandlers: UseWfolioHandlers = () => {
+export const usePortfolioFileNav: UseWfolioHandlers = () => {
     const {t} = useTranslation();
 
     const handleCreate = useCallback(async () => {
@@ -48,8 +48,8 @@ export const useWfolioHandlers: UseWfolioHandlers = () => {
         }
     }, [t]);
 
-    useTauriEvent('menu:file_create', handleCreate);
-    useTauriEvent('menu:file_open', handleOpen);
+    usePortfolioMenuEvent(PortfolioMenuEvent.file_create, handleCreate);
+    usePortfolioMenuEvent(PortfolioMenuEvent.file_open, handleOpen);
 
     return {
         handleCreate,

@@ -10,7 +10,13 @@ fn make_entry(app: &AppHandle, entry: &Entry) -> tauri::Result<Item> {
             id,
             label,
             shortcut,
-        } => Box::new(MenuItem::with_id(app, *id, *label, true, *shortcut)?),
+        } => Box::new(MenuItem::with_id(
+            app,
+            id.as_str(),
+            *label,
+            true,
+            *shortcut,
+        )?),
         Entry::Separator => Box::new(PredefinedMenuItem::separator(app)?),
         Entry::Predefined(kind) => Box::new(match kind {
             Predefined::Quit => PredefinedMenuItem::quit(app, None)?,

@@ -1,3 +1,5 @@
+use super::menu_id::MenuId;
+
 pub struct MenuSpec(pub Vec<Section>);
 
 pub struct Section {
@@ -7,7 +9,7 @@ pub struct Section {
 
 pub enum Entry {
     Item {
-        id: &'static str,
+        id: MenuId,
         label: &'static str,
         shortcut: Option<&'static str>,
     },
@@ -30,7 +32,7 @@ pub fn section(title: &'static str, entries: Vec<Entry>) -> Section {
     Section { title, entries }
 }
 
-pub fn item(id: &'static str, label: &'static str) -> Entry {
+pub fn item(id: MenuId, label: &'static str) -> Entry {
     Entry::Item {
         id,
         label,

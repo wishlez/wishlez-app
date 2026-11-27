@@ -6,6 +6,10 @@ import {HashRouter} from 'react-router';
 import '@/i18n/i18n.ts';
 import '@/src/app.css';
 
+if (import.meta.env.DEV && import.meta.env.VITE_INIT_ROUTE) {
+    window.location.hash = import.meta.env.VITE_INIT_ROUTE;
+}
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <HashRouter>

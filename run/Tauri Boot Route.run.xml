@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tauri Boot Route" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="tauri" />
+    </scripts>
+    <arguments value="dev -- -- ../MyPortfolio.wfolio" />
+    <node-interpreter value="project" />
+    <envs>
+      <env name="VITE_INIT_ROUTE" value="" />
+    </envs>
+    <EXTENSION ID="com.intellij.lang.javascript.buildTools.npm.rc.StartBrowserRunConfigurationExtension">
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+    </EXTENSION>
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="false" run_configuration_name="Export types" run_configuration_type="CargoCommandRunConfiguration" />
+    </method>
+  </configuration>
+</component>

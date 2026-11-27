@@ -1,6 +1,7 @@
 use super::{focus_window, launcher};
 use crate::data::portfolio::Portfolio;
 use crate::error::WishlezError;
+use crate::menu;
 use crate::state::OpenPortfolios;
 use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
@@ -37,7 +38,14 @@ fn open_portfolio(app: &AppHandle, path: String, portfolio: Portfolio) -> tauri:
         }
     };
 
-    window.set_menu(crate::menu::build(app, &crate::menu::portfolio::menu())?)?;
+    let menu = menu::build(app, &menu::portfolio::menu())?;
+
+    #[cfg(target_os = "macos")]
+    app.set_menu(menu)?;
+
+    #[cfg(not(target_os = "macos"))]
+    window.set_menu(menu)?;
+
     focus_window(&window)?;
 
     if let Some(launcher) = app.get_webview_window(launcher::LAUNCHER) {

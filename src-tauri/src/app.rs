@@ -29,6 +29,18 @@ pub fn handle_singleton(app: &tauri::AppHandle, args: Vec<String>, cwd: String) 
 }
 
 pub fn handle_runtime_events(app: &tauri::AppHandle, event: tauri::RunEvent) {
+    #[cfg(target_os = "macos")]
+    if let tauri::RunEvent::Reopen {
+        has_visible_windows: false,
+        ..
+    } = &event
+    {
+        let app = app.clone();
+        tauri::async_runtime::spawn(async move {
+            let _ = launcher::open_launcher(&app);
+        });
+    }
+
     if let tauri::RunEvent::ExitRequested {
         code: None, api, ..
     } = event

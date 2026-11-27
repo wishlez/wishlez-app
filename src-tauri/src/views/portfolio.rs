@@ -23,12 +23,15 @@ fn open_portfolio(app: &AppHandle, path: String, portfolio: Portfolio) -> tauri:
     app.state::<OpenPortfolios>()
         .insert(&label, &path, portfolio);
 
-    let result =
-        WebviewWindowBuilder::new(app, label.clone(), WebviewUrl::App("index.html".into()))
-            .title(format!("Wishlez - {}", path))
-            .inner_size(1200.0, 800.0)
-            .min_inner_size(320.0, 480.0)
-            .build();
+    let result = WebviewWindowBuilder::new(
+        app,
+        label.clone(),
+        WebviewUrl::App("src/portfolio.html".into()),
+    )
+    .title(format!("Wishlez - {}", path))
+    .inner_size(1200.0, 800.0)
+    .min_inner_size(320.0, 480.0)
+    .build();
 
     let window = match result {
         Ok(window) => window,

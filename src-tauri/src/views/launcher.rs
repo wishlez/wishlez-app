@@ -11,15 +11,12 @@ pub fn open_launcher(app: &AppHandle) -> tauri::Result<()> {
 
     let menu = menu::build(app, &menu::launcher::menu())?;
 
-    let _window = WebviewWindowBuilder::new(
-        app,
-        LAUNCHER,
-        WebviewUrl::App("launcher.html".into()),
-    )
-        .title("Wishlez")
-        .inner_size(800.0, 600.0)
-        .min_inner_size(320.0, 480.0)
-        .build()?;
+    let _window =
+        WebviewWindowBuilder::new(app, LAUNCHER, WebviewUrl::App("src/launcher.html".into()))
+            .title("Wishlez")
+            .inner_size(800.0, 600.0)
+            .min_inner_size(320.0, 480.0)
+            .build()?;
 
     #[cfg(target_os = "macos")]
     app.set_menu(menu)?;

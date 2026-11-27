@@ -32,8 +32,8 @@ export default defineConfig(() => ({
     build: {
         rolldownOptions: {
             input: {
-                main: 'index.html',
-                launcher: 'launcher.html'
+                portfolio: 'src/portfolio.html',
+                launcher: 'src/launcher.html'
             }
         }
     }

@@ -157,4 +157,8 @@
     h6 {
         @apply text-sm font-bold capitalize;
     }
+
+    #root {
+        @apply p-4;
+    }
 }

@@ -9,7 +9,10 @@
     "code_0006": "Unable to access portfolio within the current window context"
   },
   "accounts": {
-    "list_title": "Accounts"
+    "list_title": "Accounts",
+    "user_accounts": "User Accounts",
+    "builtin_accounts": "Built-in Accounts",
+    "all_accounts": "All Accounts"
   },
   "launcher": {
     "create": "Create",

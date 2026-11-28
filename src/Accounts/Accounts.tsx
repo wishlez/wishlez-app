@@ -1,6 +1,7 @@
 import {Layout} from '@/components/Layout.tsx';
 import {showError} from '@/components/showError.ts';
 import type {Account} from '@/components/types/Account.ts';
+import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs.tsx';
 import {invoke} from '@tauri-apps/api/core';
 import {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -8,21 +9,38 @@ import {useTranslation} from 'react-i18next';
 export const Accounts: FC = () => {
     const {t} = useTranslation();
     const [accounts, setAccounts] = useState<Account[]>([]);
+    const [activeTab, setActiveTab] = useState<'user' | 'builtin' | 'all'>('user');
 
     useEffect(() => {
         invoke<Account[]>('read_accounts').then(setAccounts).catch(showError);
     }, []);
 
+    const showBuiltin = activeTab === 'builtin';
+    const filteredAccounts = activeTab === 'all' ?
+        accounts :
+        accounts.filter(account => account.isBuiltIn === showBuiltin);
+
     return (
-        <Layout title={t('accounts.list_title')}>
-            <ul className="flex flex-col gap-1">
-                {accounts.map(account => (
-                    <li key={account.id} className="flex justify-between">
-                        <span>{account.name}</span>
-                        <span className="text-sm text-muted-foreground">{account.accountType}</span>
-                    </li>
-                ))}
-            </ul>
-        </Layout>
+        <Tabs defaultValue={activeTab} onValueChange={(value) => setActiveTab(value)}>
+            <Layout
+                title={t('accounts.list_title')}
+                views={
+                    <TabsList>
+                        <TabsTrigger value={'user'}>{t('accounts.user_accounts')}</TabsTrigger>
+                        <TabsTrigger value={'builtin'}>{t('accounts.builtin_accounts')}</TabsTrigger>
+                        <TabsTrigger value={'all'}>{t('accounts.all_accounts')}</TabsTrigger>
+                    </TabsList>
+                }
+            >
+                <ul className="flex flex-col gap-1">
+                    {filteredAccounts.map(account => (
+                        <li key={account.id} className="flex justify-between">
+                            <span>{account.name}</span>
+                            <span className="text-sm text-muted-foreground">{account.accountType}</span>
+                        </li>
+                    ))}
+                </ul>
+            </Layout>
+        </Tabs>
     );
 };

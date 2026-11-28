@@ -10,6 +10,12 @@ if (import.meta.env.DEV && import.meta.env.VITE_INIT_ROUTE && !window.location.h
     window.location.hash = import.meta.env.VITE_INIT_ROUTE;
 }
 
+if (import.meta.env.PROD) {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, {capture: true});
+}
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <HashRouter>

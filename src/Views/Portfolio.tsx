@@ -2,6 +2,7 @@ import {Layout} from '@/components/Layout.tsx';
 import {Toaster} from '@/components/ui/toast.tsx';
 import {PortfolioMenuEvent} from '@/components/usePortfolioMenuEvent.ts';
 import {usePortfolioNav} from '@/components/usePortfolioNav.ts';
+import {AccountCreate} from '@/src/Accounts/AccountCreate.tsx';
 import {Accounts} from '@/src/Accounts/Accounts.tsx';
 import {FC} from 'react';
 import {Route, Routes} from 'react-router';
@@ -15,6 +16,7 @@ export const Portfolio: FC = () => {
             <Routes>
                 <Route path={'/'} element={<Layout hideBackButton title="My Portfolio"/>}/>
                 <Route path={`/${PortfolioMenuEvent.account_list}`} element={<Accounts/>}/>
+                <Route path={`/${PortfolioMenuEvent.account_create}`} element={<AccountCreate/>}/>
             </Routes>
             <Toaster/>
         </>

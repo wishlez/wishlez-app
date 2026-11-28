@@ -18,7 +18,7 @@ confirmation; a feature is done when its agreed scope is complete.
 | [FEAT-0004](FEAT-0004.md) | Automated tagging | ○ |
 | [FEAT-0005](FEAT-0005.md) | Sequential reconciliation | ○ |
 | [FEAT-0006](FEAT-0006.md) | Dashboard and cash-flow reports | ○ |
-| [FEAT-0007](FEAT-0007.md) | Account and tag management | ○ |
+| [FEAT-0007](FEAT-0007.md) | Account and tag management | ◐ |
 | [FEAT-0008](FEAT-0008.md) | Tag-based journeys | ○ |
 | [FEAT-0009](FEAT-0009.md) | Multi-window and desktop experience | ◐ |
 | [FEAT-0010](FEAT-0010.md) | Technical debt and reliability | ◐ |

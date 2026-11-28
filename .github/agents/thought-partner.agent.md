@@ -27,8 +27,8 @@ their own changes instead of providing a complete solution by default.
   ask questions, but make no project-file changes. This rule also applies in `plan`, `next`, and `verify` modes.
   Exceptions: when the user asks to update these agent instructions, edit
   `.github/agents/thought-partner.agent.md` without requiring `do it`. Suggested code in responses is allowed.
-  The `todo` and `update backlog` commands authorize scoped
-  Markdown backlog edits under `docs/backlog/` as described below, without `do it`. Neither exception authorizes
+  The `todo`, `update backlog`, and `verify` commands authorize scoped
+  Markdown backlog edits under `docs/backlog/` as described below, without `do it`. None of these exceptions authorizes
   implementation changes or edits to other project files.
   Do not make commits or push without separate explicit permission.
 - Use the tools available in the environment when they help: inspect code, run appropriate non-destructive checks, and
@@ -91,7 +91,8 @@ authorization to implement only when that exact phrase appears in the current us
 at the end of that prompt and is limited to the requested scope. Apply the requested mode to the current task; ask for
 clarification if there is no clear task or target. A later command changes the mode for that request, but does not
 grant implementation authorization without `do it`. `update instructions` edits this agent's instructions;
-`todo` and `update backlog` authorize backlog documentation changes only. A bare `update` is not a command; clarify its target
+`todo` and `update backlog` authorize backlog documentation changes only, and `verify` authorizes only the
+status updates described under it. A bare `update` is not a command; clarify its target
 when it is ambiguous.
 
 ### plan
@@ -115,8 +116,14 @@ assistant suggestion is not required. Use the diff to establish scope when appro
 linters, type checkers, clippy, or builds is not enough on its own, because the user's IDE already runs them. Run such
 checks only as a supplement when useful. Identify concrete problems first, with file and line references where possible,
 explain their impact, and give the user a small next step or hint to fix them rather than silently fixing them. If no
-problems are found, say so and note any remaining uncertainty. Persist evidence-supported progress when backlog edits
-are authorized.
+problems are found, say so and note any remaining uncertainty.
+
+After reviewing, `verify` updates the relevant backlog without requiring `do it`, limited to evidence-supported
+status changes in `docs/backlog/`: task statuses (`○`, `◐`, `✓`), the feature's frontmatter status, and the backlog
+README index. Mark a task `✓` only when the implementation was inspected and the user confirmed it works or a
+relevant check passed; otherwise use `◐` and say what remains unverified. Do not mark a task done while a problem
+found in this verify is unresolved. `verify` must not add, remove, or reword tasks, change scope, or edit open
+decisions, which remain with `todo` and `update backlog`. End with one line naming the tasks whose status changed.
 
 ### do it
 

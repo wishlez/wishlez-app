@@ -1,4 +1,8 @@
 {
+  "common": {
+    "reset": "Reset",
+    "cancel": "Cancel"
+  },
   "errors": {
     "code": "An unknown error occurred",
     "code_0001": "Something went wrong during the last operation",
@@ -12,7 +16,18 @@
     "list_title": "Accounts",
     "user_accounts": "User Accounts",
     "builtin_accounts": "Built-in Accounts",
-    "all_accounts": "All Accounts"
+    "all_accounts": "All Accounts",
+    "create_account": "Create Account",
+    "form": {
+      "name": "Account Name",
+      "name_error": "Account name is required and must be from 1 to 100 characters",
+      "account_type": "Account Type",
+      "account_type_asset": "Asset",
+      "account_type_liability": "Liability",
+      "account_type_income": "Income",
+      "account_type_expense": "Expense",
+      "account_type_equity": "Equity"
+    }
   },
   "launcher": {
     "create": "Create",
